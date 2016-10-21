@@ -1,7 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {Platform, ionicBootstrap, Nav, LoadingController, AlertController} from 'ionic-angular';
-import {StatusBar, Push, Splashscreen, SocialSharing, Device} from 'ionic-native';
-import {provideCloud, CloudSettings} from '@ionic/cloud-angular';
+import {StatusBar, Splashscreen, SocialSharing, Device, Dialogs} from 'ionic-native';
+import {provideCloud, CloudSettings, Push, PushToken} from '@ionic/cloud-angular';
 import {Deploy} from '@ionic/cloud-angular';
 import { NewsPage } from './pages/news/news';
 import {PushNotification} from './providers/push-notification/push-notification';
@@ -9,6 +9,18 @@ import {PushNotification} from './providers/push-notification/push-notification'
 const cloudSettings: CloudSettings = {
     'core': {
         'app_id': '9ee12683'
+    },
+    'push': {
+        'sender_id': '242004580343',
+        'pluginConfig': {
+            'ios': {
+                'badge': true,
+                'sound': true
+            },
+            'android': {
+                'iconColor': '#343434'
+            }
+        }
     }
 };
 
@@ -24,7 +36,7 @@ export class MyApp {
     updateStatus: any;
     loading: boolean;
 
-    constructor(private platform: Platform, private pushNotification: PushNotification, public alertCtrl: AlertController, private deploy: Deploy, public loadingCtrl: LoadingController) {
+    constructor(public push: Push, private platform: Platform, private pushNotification: PushNotification, public alertCtrl: AlertController, private deploy: Deploy, public loadingCtrl: LoadingController) {
         this.pages = [
         {name: '', title: 'ពត៌មានជាតិ', component: NewsPage },
         { name: 'kohsantepheap', title: 'កោះសន្តិភាព', component: NewsPage },
@@ -44,44 +56,29 @@ export class MyApp {
             StatusBar.styleDefault();
             Splashscreen.hide();
 
-            //Push Notification
-            let push = Push.init({
-                android: {
-                    senderID: "242004580343"
-                },
-                ios: {
-                    alert: "true",
-                    badge: true,
-                    sound: 'false'
-                },
-                windows: {}
-            });
-            push.on('registration', (data) => {
+            this.push.register().then((t: PushToken) => {
+                return this.push.saveToken(t);
+            }).then((t: PushToken) => {
                 var deviceInfo = {
                     uuid: Device.device.uuid,
-                    deviceToken: data.registrationId,
+                    deviceToken: t.token,
                     appName: 'khmernews'
                 }
                 this.pushNotification.insert(deviceInfo).then(() => {
                     console.log(deviceInfo);
+                    console.log('Token saved:', t.token);
                 });
             });
-            push.on('notification', (data) => {
-                let self = this;
-                if (data.additionalData.foreground) {
-                    console.log('You are in the app');
-                }
-                else{
-                    // alert('From outside the app');
-                    console.log('You outside app');
-                    self.nav.setRoot(NewsPage);
-                }
-            });
-            push.on('error', (e) => {
-                console.log(e.message);
+
+            this.push.rx.notification()
+            .subscribe((msg) => {
+                Dialogs.alert(msg.text, msg.title, 'Done').then(() => {
+                    console.log('done alert');
+                });
             });
 
-            // this.updateApp();
+
+            this.updateApp();
         });
     }
 
@@ -91,7 +88,6 @@ export class MyApp {
             websiteKh: page.title
         });
     }
-
 
 
     updateApp(){
