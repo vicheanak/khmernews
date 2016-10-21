@@ -21,7 +21,9 @@ export class News {
                 'authorization': '04;oCMQmit>Q8_LxYg4<BS6x%8eX$F7z4d1cl:a0h5CIr9Q!}a2O+6W@Ho5dM@'
             });
             let options = new RequestOptions({ headers: headers });
-            let body = {};
+            let body = {
+                appName: 'khmernews'
+            };
             let reqPage = page == 1 ? '?page=1' : '?page=' + page;
             this.http.post(this.host + '/' + website + reqPage, body, options)
             .subscribe(data => {
