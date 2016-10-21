@@ -1,0 +1,59 @@
+.news {
+
+
+  .title{
+     font-family: Battambang;
+     line-height: 35px;
+     color: #0048c1;
+ }
+
+ .share-button{
+  height: 28px;
+  width: 70px;
+  background-color: transparent !important;
+  background: url(../../build/images/share.png) no-repeat;
+  background-size: 100%;
+  background-position: 0px 0px;
+  box-shadow: none !important;
+  border-color: rgba(0,0,0,0) !important;
+  outline: none !important;
+}
+
+.description{
+    font-family: Battambang;
+    line-height: 25px;
+    color: #000;
+    font-size: 100%;
+}
+
+.imageContainer {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    position: relative;
+    margin: 0px 5px 0px 0px;
+}
+.imageCenterer {
+    width: 1000px;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    margin-left: -500px;
+}
+.imageCenterer img {
+    display: block;
+    margin: 0 auto;
+    width: 18%;
+}
+
+.no-padding{
+    padding: 0px !important;
+}
+
+.news-list ion-label{
+  margin: 4px 0px;
+}
+
+
+
+}

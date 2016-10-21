@@ -1,0 +1,96 @@
+@font-face {
+  font-family: 'Battambang';
+  src: url('../fonts/battambang.ttf')  format("truetype");;
+}
+
+$font-family-md-base: "Battambang";
+$font-family-ios-base: "Battambang";
+$font-family-wp-base: "Battambang";
+
+@import "../pages/news/news";
+@import "../pages/detail/detail";
+
+ion-avatar[item-left], ion-thumbnail[item-left]{
+  width: 100px;
+  height: 100px;
+  display: flex;
+}
+
+ion-thumbnail img{
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+}
+
+.item{
+  align-items: flex-start;
+}
+
+ion-label{
+ overflow: visible;
+ white-space: normal;
+}
+
+.item .item-inner{
+ padding-right: 0px;
+}
+
+.toolbar-title{
+  font-family: Battambang;
+}
+
+ion-label{
+  font-family: Battambang;
+}
+
+.article-description{
+  padding: 0px 10px;
+}
+
+p.posted_date {
+  color: grey;
+  font-size: 70%;
+}
+
+.detail-description{
+ font-family: Battambang;
+}
+
+
+h1.detail-title{
+  font-family: Battambang;
+  font-size: 130%;
+}
+
+h2.title{
+ font-size: 92%;
+ font-family: Battambang;
+ line-height: 25px;
+ color: #092961;
+}
+
+ion-list .item .item-inner{
+  border-bottom: 1px solid #f5f5f5;
+}
+
+span.note {
+  position: absolute;
+  right: 10px;
+  bottom: 0px;
+  font-size: 70%;
+  color: gray;
+}
+
+span.source{
+ position: absolute;
+ left: 105px;
+ bottom: 0px;
+ font-size: 70%;
+ color: gray;
+}
+
+.battambang{
+  font-family: Battambang;
+}
+
+

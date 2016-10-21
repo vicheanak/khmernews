@@ -1,0 +1,47 @@
+<ion-header>
+    <ion-navbar primary>
+        <button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>{{title}}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="news">
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content class="battambang"
+        pullingIcon="arrow-dropdown"
+        pullingText=""
+        refreshingSpinner="circles"
+        refreshingText="">
+    </ion-refresher-content>
+</ion-refresher>
+<div *ngIf="newsData.length">
+    <ion-card *ngFor="let news of newsData">
+        <img src="{{news.imageUrl}}" (click)="goDetail(news.id)" onerror="this.style.display='none'"/>
+        <ion-card-content>
+            <ion-card-title class="title" (click)="goDetail(news.id)" >
+                {{news.name}}
+            </ion-card-title>
+            <p class="description">
+                {{news.description}}
+            </p>
+        </ion-card-content>
+        <ion-row no-padding>
+            <ion-col>
+                <button class="posted-date" ion-button clear color="dark" small>
+                    {{news.Website.name}} - {{news.postedDate}}
+                </button>
+            </ion-col>
+            <ion-col text-right>
+                <button (click)="share(news.url)" class="share-button"></button>
+            </ion-col>
+        </ion-row>
+    </ion-card>
+</div>
+
+<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+</ion-infinite-scroll>
+
+</ion-content>

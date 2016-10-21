@@ -1,0 +1,41 @@
+.detail {
+
+    .html-title{
+        font-size: 120%;
+        line-height: 30px;
+        color: #0048c1;
+    }
+
+    .html-source{
+        color: #092961;
+    }
+
+    .html-description{
+        p{
+            font-family: 'Battambang';
+            font-size: 100%;
+            color: #000;
+        }
+    }
+
+    .back-page{
+     height: 60px;
+     width: 60px;
+     background-color: transparent !important;
+     background: url(../../build/images/back.png) no-repeat;
+     background-size: 100%;
+     background-position: 0px 0px;
+     box-shadow: none !important;
+     border-color: rgba(0,0,0,0) !important;
+     outline: none !important;
+ }
+
+ p{
+    padding: 10px 0px;
+}
+
+img{
+    width: 100%;
+}
+
+}
